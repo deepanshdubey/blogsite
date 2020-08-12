@@ -1,12 +1,20 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import json
 import pymysql
 pymysql.install_as_MySQLdb()
 
 
+with open('C:/Users/fangs/PycharmProjects/blogsite/templates/config.json', 'r') as c:
+    params = json.load(c)["params"]
+local_server = True
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/codeblogs'
+if local_server:
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
+
 db = SQLAlchemy(app)
 
 class Contacts(db.Model):
@@ -17,8 +25,15 @@ class Contacts(db.Model):
     msg = db.Column(db.String(120),  nullable=False)
     date = db.Column(db.String(12),  nullable=True)
 
+class Posts(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(80), unique=False, nullable=False)
+    slug = db.Column(db.String(30),  nullable=False)
+    content = db.Column(db.String(120),  nullable=False)
+    date = db.Column(db.String(12),  nullable=True)
 
-@app.route("/home")
+
+@app.route("/")
 def home():
     return render_template('index.html')
 
@@ -26,11 +41,14 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route("/post")
-def post():
-    return render_template('post.html')
+@app.route("/post/<string:post_slug>", methods=['GET'])
+def post_route(post_slug):
+    post = Posts.query.filter_by(slug=post_slug).first()
 
-@app.route("/contact", methods = ['GET', 'POST'])
+    return render_template('post.html',  post=post)
+
+
+@app.route("/contact", methods=['GET', 'POST'])
 def contact():
     if(request.method=='POST'):
         name = request.form.get('name')

@@ -1,0 +1,9 @@
+{
+  "params": {
+    "local_server": "True",
+    "local_uri": "mysql://root:@localhost/blogscode",
+    "prod_uri": "mysql://root:@localhost/blogscode",
+    "post_title": "Blogs-Code",
+    "tag_line": "Welcome to the blog"
+  }
+}
