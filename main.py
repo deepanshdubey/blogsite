@@ -5,7 +5,6 @@ import json
 import pymysql
 pymysql.install_as_MySQLdb()
 
-
 with open('C:/Users/fangs/PycharmProjects/blogsite/templates/config.json', 'r') as c:
     params = json.load(c)["params"]
 local_server = True
@@ -29,8 +28,9 @@ class Posts(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), unique=False, nullable=False)
     slug = db.Column(db.String(30),  nullable=False)
-    content = db.Column(db.String(120),  nullable=False)
+    content = db.Column(db.String(200),  nullable=False)
     date = db.Column(db.String(12),  nullable=True)
+    img_name = db.Column(db.String(12), nullable=True)
 
 
 @app.route("/")
@@ -39,18 +39,18 @@ def home():
 
 @app.route("/about")
 def about():
-    return render_template('about.html')
+    return render_template('about.html', params=params)
 
 @app.route("/post/<string:post_slug>", methods=['GET'])
 def post_route(post_slug):
     post = Posts.query.filter_by(slug=post_slug).first()
 
-    return render_template('post.html',  post=post)
+    return render_template('post.html', params=params, post=post)
 
 
 @app.route("/contact", methods=['GET', 'POST'])
 def contact():
-    if(request.method=='POST'):
+    if request.method == 'POST':
         name = request.form.get('name')
         email = request.form.get('email')
         phone = request.form.get('phone')
@@ -61,4 +61,4 @@ def contact():
         db.session.commit()
     return render_template('contact.html')
 
-app.run(debug=True)
+app.run(debug = True)

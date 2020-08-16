@@ -4,6 +4,7 @@
     "local_uri": "mysql://root:@localhost/blogscode",
     "prod_uri": "mysql://root:@localhost/blogscode",
     "post_title": "Blogs-Code",
-    "tag_line": "Welcome to the blog"
+    "tag_line": "Welcome to the blog",
+    "about_text": "Hi, this is just an initial prototype of my own blog site."
   }
 }
