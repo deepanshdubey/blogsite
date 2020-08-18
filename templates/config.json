@@ -1,10 +1,15 @@
 {
   "params": {
+    "blog_name": "BlogsCode",
     "local_server": "True",
     "local_uri": "mysql://root:@localhost/blogscode",
     "prod_uri": "mysql://root:@localhost/blogscode",
     "post_title": "Blogs-Code",
     "tag_line": "Welcome to the blog",
-    "about_text": "Hi, this is just an initial prototype of my own blog site."
+    "about_text": "Hi, this is just an initial prototype of my own blog site.",
+    "no_of_posts": 5,
+    "admin_user": "deepansh",
+    "admin_password": "ihwwmsnvml",
+    "upload_location": "C:\\Users\\fangs\\PycharmProjects\\blogsite\\static"
   }
 }
