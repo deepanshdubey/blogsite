@@ -16,12 +16,13 @@
     </div>
   </header>
 <h1>Basic Actions</h1>
-<a href="/dashboard"><button class="btn btn-primary">Dashboard Home</button></a>
-<a href="/logout"><button class="btn btn-primary">Logout</button></a>
+<a href="/dashboard/"><button class="btn btn-primary">Dashboard Home</button></a>
+<a href="/logout/"><button class="btn btn-primary">Logout</button></a>
 
 <h1>Add/Edit Posts</h1>
+<hr>
 
-<form name="sentMessage" id="contactForm" method="post" action="/edit/{{post.sno}}" novalidate>
+<form name="sentMessage" id="contactForm" method="post" action="/edit/{{post.sno}}/" novalidate>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Title</label>
@@ -32,7 +33,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Tagline</label>
-              <input type="text" class="form-control" placeholder="Your tagline." id="tline" name='tagline' required data-validation-required-message="Please enter your tagline." value="{{post.tagline}}">
+              <input type="text" class="form-control" placeholder="Your tagline." id="tline" name='tline' required data-validation-required-message="Please enter your tagline." value="{{post.tagline}}">
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -46,14 +47,14 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Content</label>
-              <textarea rows="5" class="form-control" placeholder="Content" id="Content" name='content' required data-validation-required-message="Please enter content." value="{{post.content}}"></textarea>
+              <textarea rows="" value="{{post.content}}" class="form-control" placeholder="Content" id="content" name='content' ></textarea>
               <p class="help-block text-danger"></p>
             </div>
           </div>
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Image file</label>
-              <input  rows="1" class="form-control" placeholder="Image file" id="img_file" name='img_file' required data-validation-required-message="Please enter image file name." value="{{post.img_file}}"></input>
+              <input  rows="1" class="form-control" placeholder="Image file" id="img_file" name='img_file' value="{{post.img_name}}" ></input>
               <p class="help-block text-danger"></p>
             </div>
           </div>
@@ -61,8 +62,4 @@
           <div id="success"></div>
           <button type="submit" class="btn btn-primary" id="sendMessageButton">Submit</button>
         </form>
-  
-
- 
-
 {% endblock %}
