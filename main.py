@@ -180,3 +180,13 @@ def contact():
     return render_template('contact.html')
 
 app.run(debug=True)
+
+#contact class updated :-
+
+class Contacts(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), unique=False, nullable=False)
+    email = db.Column(db.String(30),  nullable=False)
+    phone = db.Column(db.String(12),  nullable=False)
+    msg = db.Column(db.String(120),  nullable=False)
+    date = db.Column(db.String(12),  nullable=True)
